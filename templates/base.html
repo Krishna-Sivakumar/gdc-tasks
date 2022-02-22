@@ -1,8 +1,8 @@
-{% load static tailwind_tags %}
+{% load static %}
 <html>
     <head>
         <title>Task Manager</title>
-		{% tailwind_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     </head>
     <body class="flex justify-center">
         <div class="bg-white m-5 max-w-sm max-h-screen flex flex-col grow">
