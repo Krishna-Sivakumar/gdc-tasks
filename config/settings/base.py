@@ -86,6 +86,9 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "task_manager.users",
+    "tasks",
+    "tailwind",
+    "theme",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -176,7 +179,7 @@ TEMPLATES = [
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#dirs
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": ["templates"],
         # https://docs.djangoproject.com/en/dev/ref/settings/#app-dirs
         "APP_DIRS": True,
         "OPTIONS": {
@@ -332,3 +335,21 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+TAILWIND_APP_NAME = "theme"
+
+LOGIN_REDIRECT_URL = "/tasks"
+LOGIN_URL = "/user/login"
+LOGOUT_REDIRECT_URL = "/user/login"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+TAILWIND_APP_NAME = "theme"
+
+BROKER_URL = "redis://localhost:6379/"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+SECRET_KEY = "lol"

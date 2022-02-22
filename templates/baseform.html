@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<p class="text-4xl font-bold capitalize">{% block title %}{% endblock title %}</p>
+<form action="" method="post" class="flex flex-col my-4">
+    {% csrf_token %}
+    {% for field in form %}
+        {{field.errors}}
+        {% if field.widget_type == 'checkbox' %}
+            <label for="{{field.id_for_label}}">
+                {{field}} &nbsp; {{field.label}}
+            </label>
+        {% else %}
+            {{field.label_tag}}
+            {{field}}
+        {% endif %}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+        <br>
+    {% endfor %}
+    <input class="block drop-shadow-md p-4 bg-gradient-to-r from-rose-400 to-rose-600 rounded-xl text-center text-white active:drop-shadow-none active:brightness-110 transition text-lg font-bold" type="submit" value="{% block submit %}{% endblock submit %}">
+</form>
+{% endblock content %}
