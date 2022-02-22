@@ -36,7 +36,7 @@ nested_history_router.register(
     "history", TaskHistoryApiViewset, basename="task-history")
 
 urlpatterns = [
-    path("", RedirectView.as_view()),
+    path("", HomeRedirectView.as_view()),
     path("tasks/", CurrentTasksView.as_view()),
     path("completed_tasks/", CompletedTasksView.as_view()),
     path("all_tasks/", AllTasksView.as_view()),
