@@ -6,45 +6,35 @@ from task_manager.users.models import User
 from tasks.models import Report, Task
 
 
-class TaskForm(ModelForm):
+class StyleMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs["class"] = "p-2 bg-slate-100 rounded"
+            visible.field.widget.attrs["style"] = "border-color: transparent"
+
+
+class TaskForm(StyleMixin, ModelForm):
     class Meta:
         model = Task
         fields = ["title", "description", "status", "priority", "completed"]
 
-    def __init__(self, *args, **kwargs):
-        super(TaskForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs["class"] = "bg-slate-100 rounded"
-            visible.field.widget.attrs["style"] = "border-color: transparent"
 
-
-class TaskUserCreationForm(UserCreationForm):
+class TaskUserCreationForm(StyleMixin, UserCreationForm):
 
     class Meta:
         model = User
         fields = ["username", "email"]
 
-    def __init__(self, *args, **kwargs):
-        super(TaskUserCreationForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs["class"] = "bg-slate-100 rounded"
-            visible.field.widget.attrs["style"] = "border-color: transparent"
 
-
-class TaskUserLoginForm(AuthenticationForm):
+class TaskUserLoginForm(StyleMixin, AuthenticationForm):
 
     class Meta:
         model = User
         fields = ["username"]
 
-    def __init__(self, *args, **kwargs):
-        super(TaskUserLoginForm, self).__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs["class"] = "bg-slate-100 rounded"
-            visible.field.widget.attrs["style"] = "border-color: transparent"
 
-
-class ScheduleReportForm(ModelForm):
+class ScheduleReportForm(StyleMixin, ModelForm):
 
     time = forms.TimeField(
         widget=forms.TimeInput(
@@ -63,9 +53,3 @@ class ScheduleReportForm(ModelForm):
     class Meta:
         model = Report
         fields = ["time", "disabled"]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for visible in self.visible_fields():
-            visible.field.widget.attrs["class"] = "bg-slate-100 rounded"
-            visible.field.widget.attrs["style"] = "border-color: transparent"
