@@ -353,3 +353,11 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 SECRET_KEY = "lol"
 
 ALLOWED_HOSTS = ["krishna-sivakumar-tasks.herokuapp.com"]  # env.list("DJANGO_ALLOWED_HOSTS", default=["example.com"])
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "noreply@tasks.com"
+SERVER_EMAIL = "noreply@tasks.com"

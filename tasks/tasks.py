@@ -39,7 +39,7 @@ def batch_email():
             send_mail(
                 "Daily Status Report",
                 render_to_string("report.txt", user_summary(report.user)),
-                "tasks@taskmanager.com",
+                "noreply@tasks.com",
                 [report.user.email, "dummy@user.com"]
             )
 
